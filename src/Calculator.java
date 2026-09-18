@@ -1,34 +1,20 @@
 public class Calculator {
-    private double operand1;
-    private double operand2;
+    private double currentResult = 0;
     private char operator;
-    public double result;
 
-    public void getOperand(double operand, boolean isFirstOperand) {
-        if (isFirstOperand) {
-            this.operand1 = operand;
-        } else {
-            if (operand == 0 & this.operator == '/') {
-                System.out.println("На ноль делить нельзя!");
-            } else {
-                this.operand2 = operand;
-            }
-        }
+    public void setCurrentResult(double in) {
+        this.currentResult = in;
     }
-    public void getOperator(String operator) {
-        int length = operator.length();
-        if  (length == 1) {
+    public void setOperator(String operator) {
             this.operator = operator.charAt(0);
-        } else {
-            System.out.println("Вы ввели неверный формат оператора. Подходят только '+', '-', '*', '/'");
-        }
     }
-    public void calculate() {
+    public double calculate(double secondOperand) {
         switch (this.operator) {
-            case '+': result = operand1 + operand2; break;
-            case '-': result = operand1 - operand2; break;
-            case '*': result = operand1 * operand2; break;
-            case '/': result = operand1 / operand2; break;
+            case '+': currentResult = currentResult + secondOperand; break;
+            case '-': currentResult = currentResult - secondOperand; break;
+            case '*': currentResult = currentResult * secondOperand; break;
+            case '/': currentResult = currentResult / secondOperand; break;
         }
+        return currentResult;
     }
 }

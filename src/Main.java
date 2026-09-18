@@ -5,15 +5,30 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        Scanner input = new Scanner(System.in);
+        Console console = new Console();
+        Scanner scanner = new Scanner(System.in);
+        boolean flag = true;
 
-        System.out.println("Введите первое число: ");
-        calculator.getOperand(input.nextDouble(), true);
-        System.out.println("Введите оператор в простом виде (+ - * /): ");
-        calculator.getOperator(input.next());
-        System.out.println("Введите второе число: ");
-        calculator.getOperand(input.nextDouble(), false);
-        calculator.calculate();
-        System.out.println("Ответ: " + calculator.result);
+        while (flag){
+            while (true) {
+                if (console.gettingFirstOperand(scanner)) {
+                    calculator.setCurrentResult(console.bufferFirstOperand);
+                    break;
+                }
+            }
+            while (true) {
+                if (console.gettingFirstOperand(scanner)) {
+                    calculator.setOperator(console.bufferOperator);
+                    break;
+                }
+            }
+            while (true) {
+                // засунуть сюда проверку деления на ноль
+                if (console.gettingSecondOperand(scanner)) {
+                    calculator.calculate(console.bufferSecondOperand);
+                    break;
+            }
+            }
+        }
+        }
     }
-}
