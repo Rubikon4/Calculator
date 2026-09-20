@@ -2,19 +2,29 @@ public class Calculator {
     private double currentResult = 0;
     private char operator;
 
-    public void setCurrentResult(double in) {
-        this.currentResult = in;
+    public void setCurrentResult(double operand) {
+        // Устанавливает текущий операнд
+        this.currentResult = operand;
     }
-    public void setOperator(String operator) {
-            this.operator = operator.charAt(0);
+
+    public void setOperator(char operator) {
+        // Устанавливает оператор
+        this.operator = operator;
     }
+
     public double calculate(double secondOperand) {
-        switch (this.operator) {
-            case '+': currentResult = currentResult + secondOperand; break;
-            case '-': currentResult = currentResult - secondOperand; break;
-            case '*': currentResult = currentResult * secondOperand; break;
-            case '/': currentResult = currentResult / secondOperand; break;
-        }
-        return currentResult;
+        // Производит вычисление
+        return switch (this.operator) {
+            case '+' -> this.currentResult + secondOperand;
+            case '-' -> this.currentResult - secondOperand;
+            case '*' -> this.currentResult * secondOperand;
+            case '/' -> {
+                if (secondOperand == 0) {
+                    throw new IllegalArgumentException("Нельзя делить на ноль!");
+                }
+                yield this.currentResult / secondOperand;
+            }
+            default -> throw new IllegalArgumentException("Неподдерживаемый вид оператора (" + this.operator + ")!");
+        };
     }
 }
