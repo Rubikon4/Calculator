@@ -5,30 +5,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        Console console = new Console();
         Scanner scanner = new Scanner(System.in);
-        boolean flag = true;
 
-        while (flag){
-            while (true) {
-                if (console.gettingFirstOperand(scanner)) {
-                    calculator.setCurrentResult(console.bufferFirstOperand);
-                    break;
-                }
+        while (true){
+            System.out.println("Калькулятор 1.0. запущен...");
+            calculator.setCurrentResult(Console.getOperand(scanner));
+            calculator.setOperator(Console.getOperator(scanner));
+            try {
+                double result = calculator.calculate(Console.getOperand(scanner));
+                System.out.println(result);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
-            while (true) {
-                if (console.gettingFirstOperand(scanner)) {
-                    calculator.setOperator(console.bufferOperator);
-                    break;
-                }
-            }
-            while (true) {
-                // засунуть сюда проверку деления на ноль
-                if (console.gettingSecondOperand(scanner)) {
-                    calculator.calculate(console.bufferSecondOperand);
-                    break;
-            }
-            }
-        }
         }
     }
+}

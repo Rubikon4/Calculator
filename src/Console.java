@@ -1,38 +1,25 @@
 import java.util.Scanner;
 
 public class Console {
-    public double bufferFirstOperand;
-    public double bufferSecondOperand;
-    public String bufferOperator;
-
-    public boolean gettingFirstOperand(Scanner scanner) {
-        System.out.println("Введите ваше первое число: ");
-        if (scanner.hasNextDouble()) {
-            this.bufferFirstOperand = scanner.nextDouble();
-            return true;
-        } else {
-            System.out.println("Значение должно быть числом!");
-            return false;
+    public static double getOperand(Scanner scanner) {
+        // Получает первый операнд
+        while (true) {
+            System.out.println("Введите операнд: ");
+            if (scanner.hasNextDouble()) {
+                return scanner.nextDouble();
+            }
+            System.out.println("Некорректный формат ввода. Попробуйте еще раз: ");
+            scanner.next();
         }
     }
-    public boolean gettingSecondOperand(Scanner scanner) {
-        System.out.println("Введите ваше второе число: ");
-        if (scanner.hasNextDouble()) {
-            this.bufferSecondOperand = scanner.nextDouble();
-            return true;
-        } else {
-            System.out.println("Значение должно быть числом!");
-            return false;
+    public static char getOperator(Scanner scanner) {
+        // Получает оператор
+        while (true) {
+            System.out.println("Действие с операндами (введите символ в формате + - * /): ");
+            String input = scanner.next();
+            if  (input.length() == 1 && "+-*/".contains(input)) {
+                return input.charAt(0);
+            }
         }
-    }
-    public boolean gettingOperator(Scanner scanner) {
-        System.out.println("Введите один оператор в формате '+ - * /': ");
-        String operator = scanner.next();
-            if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
-                this.bufferOperator = operator;
-                return true;
-            } else {
-                System.out.println("Некорректный формат оператора!");
-                return false;}
     }
 }
