@@ -14,7 +14,7 @@ public class Calculator {
 
     public double calculate(double secondOperand) {
         // Производит вычисление
-        return switch (this.operator) {
+        double result = switch (this.operator) {
             case '+' -> this.currentResult + secondOperand;
             case '-' -> this.currentResult - secondOperand;
             case '*' -> this.currentResult * secondOperand;
@@ -26,5 +26,11 @@ public class Calculator {
             }
             default -> throw new IllegalArgumentException("Неподдерживаемый вид оператора (" + this.operator + ")!");
         };
+
+        if (Double.isInfinite(result)) {
+            throw new IllegalArgumentException("Результат слишком большой! - Калькулятор не обрабатывает бесконечность.");
+        }
+
+        return result;
     }
 }

@@ -1,3 +1,5 @@
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Main {
@@ -6,7 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true){
-            System.out.println("Калькулятор 1.0. запущен... Для выхода в любой ммоент введите 'Q'");
+            System.out.println("Калькулятор 1.0. запущен... Для выхода в любой момент введите 'Q'");
             while (true){
                 // Пытается получить первый операнд, пока не получит
                 System.out.println("Введите первое число: ");
@@ -42,18 +44,19 @@ public class Main {
             while (true) {
                 System.out.println("Введите второй операнд: ");
                 String input = scanner.nextLine();
+                DecimalFormat f = new DecimalFormat("0.##########");
+                f.setRoundingMode(RoundingMode.HALF_UP);
 
                 if (input.trim().equalsIgnoreCase("q")) { return; }
 
                 try {
                     double result = calculator.calculate(Console.parseOperand(input));
-                    System.out.println(result);
+                    System.out.println(f.format(result));
                     break;
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
             }
-
         }
     }
 }

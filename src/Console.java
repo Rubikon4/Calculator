@@ -4,7 +4,12 @@ public class Console {
     public static double parseOperand(String input) {
         // Парсит первый операнд
         try {
-            Double doubleInput = Double.parseDouble(input);
+            double doubleInput = Double.parseDouble(input);
+
+            if (!Double.isFinite(doubleInput)) {
+                throw new IllegalArgumentException("Введите конечное число!");
+            }
+
             return doubleInput;
         }
         catch (NumberFormatException e) {
@@ -14,15 +19,10 @@ public class Console {
     public static char getOperator(String input) {
         // Парсит оператор
         input = input.trim();
+
         if  (input.length() == 1 && "+-*/".contains(input)) {
             return input.charAt(0);
-            }
+        }
         throw new IllegalArgumentException("Некорректный формат ввода!");
         }
     }
-
-/*
-check q
-string input = input
-
- */
